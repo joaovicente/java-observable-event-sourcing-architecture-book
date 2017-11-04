@@ -46,13 +46,15 @@ public class AuthorController {
 }
 ```
 
-```
+```bash
 mvn spring-boot:run
 ```
 
 When you curl the endpoint
 
-`curl http://localhost:8080/authors/123`
+```bash
+curl http://localhost:8080/authors/123
+```
 
 You will now see the `Nothing yet for author 123` response
 
