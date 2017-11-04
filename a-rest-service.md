@@ -2,35 +2,19 @@
 
 Let's start by building the Author service
 
-init.sh 
+init.sh
 
 `spring init \`
 
-`    -d=web \`
+`-d=web \`
 
-`    -groupId=com.joaovicente \`
+`-groupId=com.joaovicente \`
 
-`    -artifactId=author \`
+`-artifactId=author \`
 
-`    -name=author \`
+`-name=author \`
 
-`    author`
+`author`
 
-4alsdk; 
-
-`spring init \`
-
-`    -d=web \`
-
-`    -groupId=com.joaovicente \`
-
-`    -artifactId=author \`
-
-`    -name=author \`
-
-`    author`
-
-
-
-
+4alsdk;
 
