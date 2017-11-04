@@ -33,14 +33,22 @@ package com.joaovicente.author;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping(value="/authors")
 public class AuthorController {
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public String author(@PathVariable String id)   {
+    @GetMapping(value="/{id}")
+    public String getAuthor(@PathVariable String id) {
         String resp = "Nothing yet for author " + id + "\n";
+        return resp;
+    }
+    @PostMapping()
+    public String postAuthor(@RequestBody Author author)   {    
+        String resp = "Author: " + author.getName() + "," + author.getEmail();
         return resp;
     }
 }
