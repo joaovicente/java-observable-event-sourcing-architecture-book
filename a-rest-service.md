@@ -11,7 +11,7 @@ spring init \
     author
 ```
 
-Let's build the app and compile it
+Let's compile the spring boot app
 
 ```
 cd author
@@ -24,7 +24,7 @@ And run it
 mvn spring-boot:run
 ```
 
-So the application runs but is does not do anything useful, so lets stop the app now with Ctrl-C and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`and add GET and POST capabilities
+So the application runs but is does not do anything useful, so lets stop the app now and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`and add GET and POST capabilities
 
 The handler method as shown below, to expose the`GET /authors/{authorId}`endpoint and the `POST /authors`
 
@@ -92,4 +92,8 @@ curl -X POST \
 ```
 
 returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com`
+
+## Enabling Swagger
+
+
 
