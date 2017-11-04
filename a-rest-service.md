@@ -1,16 +1,14 @@
-# The Authors REST service
+# The Author REST service
 
-Let's start by building the Author service
-
-**TODO: Add lombok**
+Let's start by building the Author service. We'll depend on `web` for REST capabilities and `lombok` to auto-generate getters and setters for the REST DTOs
 
 ```bash
-spring init \ 
--d=web \
--groupId=com.joaovicente \
--artifactId=author \
--name=author \
-author
+spring init \
+    -d=web,lombok \
+    -groupId=com.joaovicente \
+    -artifactId=author \
+    -name=author \
+    author
 ```
 
 Let's build the app and compile it
@@ -75,7 +73,6 @@ You will now see the `Nothing yet for author 123` response
 DTO
 
 ```
-
 package com.joaovicente.author;
 
 @lombok.Data
@@ -83,7 +80,6 @@ public class Author {
     private String name;
     private String email;
 }
-
 ```
 
 
