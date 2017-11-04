@@ -1,6 +1,6 @@
-Spotify has a great Maven plugin \([https://github.com/spotify/docker-maven-plugin](https://github.com/spotify/docker-maven-plugin\)\), which builds a docker image via Maven.
+Spotify has a great Maven plugin \([https://github.com/spotify/docker-maven-plugin](https://github.com/spotify/docker-maven-plugin%29\), which builds a docker image via Maven.
 
-To use this plugin we are going to add the `docker.image.prefix` property to the`pom.xml `
+To use this plugin we are going to add the `docker.image.prefix` property to the`pom.xml`
 
 ```
 <properties>
@@ -9,9 +9,7 @@ To use this plugin we are going to add the `docker.image.prefix` property to the
 </properties>
 ```
 
-
-
-Add the plugin 
+Add the plugin
 
 ```
 <plugin>
@@ -37,7 +35,25 @@ Add the plugin
                 </resources>
         </configuration>
 </plugin>
+```
 
+You can now build the Docker image using the command below
+
+```
+mvn clean package docker:build
+```
+
+When you look at the images 
+
+```
+docker images | grep joaovicente
+```
+
+You should be able to see the images listed
+
+```
+joaovicente/author    0.0.1-SNAPSHOT    00224d6e274f    25 seconds ago    182MB
+joaovicente/author    latest            00224d6e274f    25 seconds ago    182MB
 ```
 
 
