@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorController {
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public String author(@PathVariable String id)   {
-        String resp = "Nothing yet for " + id + "\n";
+        String resp = "Nothing yet for author " + id + "\n";
         return resp;
     }
 }
@@ -54,5 +54,5 @@ When you curl the endpoint
 
 `curl http://localhost:8080/authors/123`
 
-You will now see the `No authors yet!` pre-baked response
+You will now see the `Nothing yet for author 123` response
 
