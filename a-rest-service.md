@@ -48,7 +48,7 @@ public class AuthorController {
     }
     @PostMapping()
     public String postAuthor(@RequestBody AuthorDto author)   {    
-        String resp = "Author: " + author.getName() + "," + author.getEmail();
+        String resp = author.getName() + "," + author.getEmail() + "\n";
         return resp;
     }
 ```
@@ -63,37 +63,35 @@ public class AuthorDto {
     private String name;
     private String email;
 }
-
-asd
 ```
 
-
-
-
-
-
-
-
-
-```java
-}
-```
+Let's run the app
 
 ```bash
-
-
-as
-
 mvn spring-boot:run
 ```
 
-When you curl the endpoint
+and try out the `GET` endpoint
 
 ```bash
 curl http://localhost:8080/authors/123
 ```
 
 You will now see the `Nothing yet for author 123` response
+
+The  POST curl command below
+
+```
+curl -X POST \
+  http://localhost:8080/authors \
+  -H 'content-type: application/json' \
+  -d '{
+  "name":"Joao",
+  "email":"joao.diogo.vicente@gmail.com"
+}'
+```
+
+returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com` 
 
 ## POST
 
