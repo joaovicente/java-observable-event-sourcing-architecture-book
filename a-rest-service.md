@@ -2,7 +2,7 @@
 
 Let's start by building the Author service
 
-```
+```bash
 spring init \ 
 -d=web \
 -groupId=com.joaovicente \
