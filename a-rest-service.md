@@ -26,9 +26,7 @@ mvn spring-boot:run
 
 So the application runs but is does not do anything useful, so lets stop the app now with Ctrl-C and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`and add GET and POST capabilities
 
-## GET
-
-The handler method as shown below, to expose the `GET /authors/{authorId}` endpoint
+The handler method as shown below, to expose the`GET /authors/{authorId}`endpoint and the `POST /authors`
 
 ```java
 package com.joaovicente.author;
@@ -49,14 +47,43 @@ public class AuthorController {
         return resp;
     }
     @PostMapping()
-    public String postAuthor(@RequestBody Author author)   {    
+    public String postAuthor(@RequestBody AuthorDto author)   {    
         String resp = "Author: " + author.getName() + "," + author.getEmail();
         return resp;
     }
+```
+
+which will use the`/src/main/java/com/joaovicente/AuthorDto.java` shown below
+
+```java
+package com.joaovicente.author;
+
+@lombok.Data
+public class AuthorDto {
+    private String name;
+    private String email;
+}
+
+asd
+```
+
+
+
+
+
+
+
+
+
+```java
 }
 ```
 
 ```bash
+
+
+as
+
 mvn spring-boot:run
 ```
 
