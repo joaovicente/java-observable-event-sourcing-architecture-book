@@ -2,7 +2,7 @@
 
 Let's start by building the Author service
 
-TODO: Add lombok
+**TODO: Add lombok**
 
 ```bash
 spring init \ 
@@ -71,8 +71,6 @@ curl http://localhost:8080/authors/123
 You will now see the `Nothing yet for author 123` response
 
 ## POST
-
-
 
 
 
