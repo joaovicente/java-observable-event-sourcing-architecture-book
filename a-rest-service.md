@@ -1,4 +1,4 @@
-# The REST service
+# The Authors REST service
 
 Let's start by building the Author service
 
@@ -41,7 +41,6 @@ public class AuthorController {
         return "No authors yet!\n";
     }
 }
-
 ```
 
 Run the app again
@@ -55,8 +54,4 @@ When you curl the endpoint
 `curl http://localhost:8080/authors/123`
 
 You will now see the `No authors yet!` pre-baked response
-
-
-
-
 
