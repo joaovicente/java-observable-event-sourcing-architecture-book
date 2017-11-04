@@ -2,6 +2,8 @@
 
 Let's start by building the Author service
 
+TODO: Add lombok
+
 ```bash
 spring init \ 
 -d=web \
@@ -24,9 +26,11 @@ And run it
 mvn spring-boot:run
 ```
 
-So the application runs but is does not do anything useful, so lets stop the app now with Ctrl-C and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`
+So the application runs but is does not do anything useful, so lets stop the app now with Ctrl-C and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`and add GET and POST capabilities
 
-Now create the`AuthorController`class and annotate it as a`@RestController`and add the`@RequestMapping`handler method as shown below, to expose the `GET /authors/{authorId}` endpoint
+## GET
+
+The handler method as shown below, to expose the `GET /authors/{authorId}` endpoint
 
 ```java
 package com.joaovicente.author;
@@ -65,4 +69,10 @@ curl http://localhost:8080/authors/123
 ```
 
 You will now see the `Nothing yet for author 123` response
+
+## POST
+
+
+
+
 
