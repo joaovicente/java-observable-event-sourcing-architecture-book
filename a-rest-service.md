@@ -79,7 +79,7 @@ curl http://localhost:8080/authors/123
 
 You will now see the `Nothing yet for author 123` response
 
-The  POST curl command below
+The  `POST` curl command below
 
 ```
 curl -X POST \
@@ -92,6 +92,4 @@ curl -X POST \
 ```
 
 returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com`
-
-
 
