@@ -91,21 +91,7 @@ curl -X POST \
 }'
 ```
 
-returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com` 
-
-## POST
-
-DTO
-
-```
-package com.joaovicente.author;
-
-@lombok.Data
-public class Author {
-    private String name;
-    private String email;
-}
-```
+returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com`
 
 
 
