@@ -72,5 +72,19 @@ You will now see the `Nothing yet for author 123` response
 
 ## POST
 
+DTO
+
+```
+
+package com.joaovicente.author;
+
+@lombok.Data
+public class Author {
+    private String name;
+    private String email;
+}
+
+```
+
 
 
