@@ -1,25 +1,23 @@
 ## Enabling Swagger
 
-Add springfox dependencies to the `pom.xml` 
+Add springfox dependencies to the `pom.xml`
 
 ```
 <dependency>
-	<groupId>io.springfox</groupId>
-	<artifactId>springfox-swagger2</artifactId>
-	<version>2.6.1</version>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.6.1</version>
 </dependency>
 <dependency>
-	<groupId>io.springfox</groupId>
-	<artifactId>springfox-swagger-ui</artifactId>
-	<version>2.6.1</version>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.6.1</version>
 </dependency>
 ```
 
+Create a swagger config class in `./src/main/java/com/joaovicente/SwaggerConfig.java`
 
-
-ads
-
-```
+```java
 com.joaovicente.author;
 
 import org.springframework.context.annotation.Bean;
@@ -44,6 +42,16 @@ public class SwaggerConfig {
     }
 }
 ```
+
+After a rebuild you should be able to see the Swagger JSON at: 
+
+http://localhost:8080/v2/api-docs 
+
+and see the swagger-ui at: 
+
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+
 
 
 
