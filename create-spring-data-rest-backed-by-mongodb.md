@@ -60,5 +60,98 @@ public interface AuthorRepository extends MongoRepository<Author, String> {
 mvn spring-boot:run
 ```
 
+# Docker setup
+
+Follow Dockerising... steps to build a docker image
+
+When done, add the following to ./src/main/resources/application.properties
+
+```
+spring.data.mongodb.host=mongoserver
+spring.data.mongodb.port=27017
+```
+
+and rebuild the docker container:
+
+```
+mvn clean package docker:build
+```
+
+Create Docker compose `./docker-compose.yml`
+
+```
+author:
+  image: joaovicente/author:latest
+  ports:
+    - "8080:8080"
+  links:
+    - mongodb
+
+mongodb:
+  image: mongo:3.0.4
+  ports:
+    - "27017:27017"
+  command: mongod --smallfiles
+```
+
+Now start-up the mongodb and author containers
+
+```
+docker-compose.yml
+```
+
+When you POST an Author
+
+```
+curl -X POST \
+  http://localhost:8080/authors \
+  -H 'content-type: application/json' \
+  -d '{
+  "name":"Joao",
+  "email":"joao.diogo.vicente@gmail.com"
+}'
+```
+
+You will see the Author created
+
+```
+{
+  "name" : "Joao",
+  "email" : "joao.diogo.vicente@gmail.com",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/authors/5a038cab52faff0001e77123"
+    },
+    "author" : {
+      "href" : "http://localhost:8080/authors/5a038cab52faff0001e77123"
+    }
+  }
+}
+```
+
+If you follow the URL shown in `_links.self.href` 
+
+```
+curl http://localhost:8080/authors/5a038cab52faff0001e77123
+```
+
+you should be able to GET the Author 
+
+```
+
+{
+  "name" : "Joao",
+  "email" : "joao.diogo.vicente@gmail.com",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/authors/5a038cab52faff0001e77123"
+    },
+    "author" : {
+      "href" : "http://localhost:8080/authors/5a038cab52faff0001e77123"
+    }
+  }
+}%               
+```
+
 
 

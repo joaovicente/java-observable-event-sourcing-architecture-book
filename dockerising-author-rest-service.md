@@ -56,7 +56,7 @@ joaovicente/author    0.0.1-SNAPSHOT    00224d6e274f    25 seconds ago    182MB
 joaovicente/author    latest            00224d6e274f    25 seconds ago    182MB
 ```
 
-You can now run the docker image as follows: 
+You can now run the docker image as follows:
 
 ```
 docker run -p 8080:8080 joaovicente/author
