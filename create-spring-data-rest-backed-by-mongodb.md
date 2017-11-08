@@ -152,5 +152,37 @@ you should be able to GET the Author
 }
 ```
 
+Load test using Taurus \(https://hub.docker.com/r/blazemeter/taurus/\)
+
+```
+sudo pip install bzt
+```
+
+create a `load-test.yml` file
+
+```
+---
+execution:
+- concurrency: 10
+  ramp-up: 1m
+  hold-for: 1m30s
+  scenario: simple
+
+scenarios:
+  simple:
+    think-time: 0.75
+    requests:
+    - http://localhost:8080/authors
+
+```
+
+Now execute the load
+
+```
+bzt load-test.yml
+```
+
+And you should see a nice ASCII dashboard showing how the Author service is coping with the load
+
 
 
