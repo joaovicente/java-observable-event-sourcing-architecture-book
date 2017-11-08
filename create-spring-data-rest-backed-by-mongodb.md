@@ -129,16 +129,15 @@ You will see the Author created
 }
 ```
 
-If you follow the URL shown in `_links.self.href` 
+If you follow the URL shown in `_links.self.href`
 
 ```
 curl http://localhost:8080/authors/5a038cab52faff0001e77123
 ```
 
-you should be able to GET the Author 
+you should be able to GET the Author
 
 ```
-
 {
   "name" : "Joao",
   "email" : "joao.diogo.vicente@gmail.com",
@@ -150,7 +149,7 @@ you should be able to GET the Author
       "href" : "http://localhost:8080/authors/5a038cab52faff0001e77123"
     }
   }
-}%               
+}
 ```
 
 
