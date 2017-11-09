@@ -191,7 +191,7 @@ execution:
 - concurrency: 1
   hold-for: 10s
   scenario: author-create
-  write-xml-jtl: full
+  #write-xml-jtl: full
 
 scenarios:
   author-create:
@@ -206,7 +206,6 @@ scenarios:
       body:
         name: ${name}
         email: ${email}
-
 ```
 
 ```
