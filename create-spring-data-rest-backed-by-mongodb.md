@@ -152,7 +152,7 @@ you should be able to GET the Author
 }
 ```
 
-Load test using Taurus \(https://hub.docker.com/r/blazemeter/taurus/\)
+Load test using Taurus \([https://hub.docker.com/r/blazemeter/taurus/\](https://hub.docker.com/r/blazemeter/taurus/\)\)
 
 ```
 sudo pip install bzt
@@ -173,7 +173,6 @@ scenarios:
     think-time: 0.75
     requests:
     - http://localhost:8080/authors
-
 ```
 
 Now execute the load
@@ -183,6 +182,50 @@ bzt load-test.yml
 ```
 
 And you should see a nice ASCII dashboard showing how the Author service is coping with the load
+
+
+
+WIP script \(not failing but not creating data\)
+
+```
+---
+execution:
+- concurrency: 1
+  hold-for: 10s
+  scenario: author-create
+  write-xml-jtl: full
+
+scenarios:
+  author-create:
+    think-time: 1
+    data-sources: 
+      - author-create.csv
+    requests:
+    - http://localhost:8080/authors
+    method: POST
+    body:
+      name: ${name}
+      email: ${email}
+
+```
+
+```
+name,email
+antoinette,antoinette@gmail.com
+brian,brian@yahoo.com
+carl,carl@gmail.com
+david,david@yahoo.com
+edith,edith@gmail.com
+frank,frank@yahoo.com
+greg,greg@gmail.com
+hugo,hugo@yahoo.com
+isabel,isabel@gmail.com
+john,john@yahoo.com
+kevin,kevin@gmail.com
+lidia,lidia@yahoo.com
+mark,mark@yahoo.com
+
+```
 
 
 
