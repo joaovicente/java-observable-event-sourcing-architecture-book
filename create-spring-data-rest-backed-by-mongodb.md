@@ -196,16 +196,17 @@ execution:
 scenarios:
   author-create:
     think-time: 1
-    data-sources: 
+    data-sources:
       - author-create.csv
     requests:
-    - http://localhost:8080/authors
-    method: POST
-    headers:
-      Content-Type: application/json    
-    body:
-      name: ${name}
-      email: ${email}
+    - url: http://localhost:8080/authors
+      method: POST
+      headers:
+        Content-Type: application/json
+      body:
+        name: ${name}
+        email: ${email}
+
 ```
 
 ```
