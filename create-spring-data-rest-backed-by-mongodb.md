@@ -19,6 +19,7 @@ import org.springframework.data.annotation.Id;
 @Data
 public class Author {
     @Id private String id;
+    @Version Long version
     private String name;
     private String email;
 }
