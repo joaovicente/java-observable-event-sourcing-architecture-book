@@ -1,14 +1,99 @@
-Assumes MongoDB is already running
+# Create app
+
+From the command line execute
 
 ```
-spring init \
+spring init \        
     -d=data-rest,data-mongodb,lombok,data-rest-hal \
     -groupId=com.joaovicente \
     -artifactId=observablespring \
-    -name=author \
-    -bootVersion=2.0.0.M6 \
+    -name=observablespring \
+    -bootVersion=2.0.0.M6 \    
     observablespring
+    
 ```
+
+# Be Docker ready
+
+## Build Docker image using a Maven docker plugin
+
+Go into your project directory
+
+```
+cd observablespring
+```
+
+And edit the `pom.xml` adding 
+
+in properties section
+
+```
+	<properties>
+		...
+		<docker.image.prefix>joaovicente</docker.image.prefix>
+	</properties>
+```
+
+And in the plugins section add the following
+
+```
+		<plugins>
+		       ...
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.11</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
+					</imageTags>
+					<baseImage>frolvlad/alpine-oraclejdk8:slim</baseImage>
+					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+
+					<!--<dockerDirectory>src/main/docker</dockerDirectory>-->
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+```
+
+## Create a Docker compose file to to run both the app and MongoDB
+
+create `docker-compose.yml`
+
+```
+observablespring:
+  image: joaovicente/observablespring:latest
+  ports:
+    - "8080:8080"
+  links:
+    - mongodb
+
+mongodb:
+  image: mongo:3.0.4
+  ports:
+    - "27017:27017"
+  command: mongod --smallfiles
+
+```
+
+## Create Entities and Repositories 
+
+
+
+
+
+
+
+
 
 `./src/main/java/com/joaovicente/author/Author.java`
 
