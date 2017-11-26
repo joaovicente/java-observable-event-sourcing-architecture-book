@@ -105,11 +105,15 @@ public class Author {
 
 And its repository
 
-...
+And the Author repository
+
+`./src/main/java/com/joaovicente/observablespring/AuthorRepository.java`
+
+```
+as
+```
 
 ---
-
-
 
 ```
 package com.joaovicente.author;
