@@ -2,7 +2,7 @@ Assumes MongoDB is already running
 
 ```
 spring init \
-    -d=data-rest,data-mongodb,lombok \
+    -d=data-rest,data-mongodb,lombok,data-rest-hal \
     -groupId=com.joaovicente \
     -artifactId=author \
     -name=author \
