@@ -85,6 +85,8 @@ mongodb:
 
 ## Create Entities and Repositories
 
+## Author
+
 Create the Author entity
 
 `./src/main/java/com/joaovicente/observablespring/Author.java`
@@ -92,8 +94,8 @@ Create the Author entity
 ```
 package com.joaovicente.observablespring;
 
-import lombok.Data;
 import org.springframework.data.annotation.Id;
+import lombok.Data;
 
 @Data
 public class Author {
@@ -105,12 +107,64 @@ public class Author {
 
 And its repository
 
-And the Author repository
-
 `./src/main/java/com/joaovicente/observablespring/AuthorRepository.java`
 
 ```
-as
+package com.joaovicente.observablespring;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import java.util.List;
+
+
+@RepositoryRestResource(collectionResourceRel = "authors", path = "authors")
+public interface AuthorRepository extends MongoRepository<Author, String> {
+    List<Author> findByName(@Param("name") String name);
+}
+```
+
+## Story
+
+Create the Story entity
+
+`./src/main/java/com/joaovicente/observablespring/Story.java`
+
+```
+package com.joaovicente.observablespring;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import lombok.Data;
+
+@Data
+public class Story {
+    @Id private String id;
+    private String title;
+    private String body;
+    @DBRef
+    Author author;
+}
+```
+
+And its repository
+
+`./src/main/java/com/joaovicente/observablespring/StoryRepository.java`
+
+```
+package com.joaovicente.observablespring;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import java.util.List;
+
+@RepositoryRestResource(collectionResourceRel = "stories", path = "stories")
+public interface StoryRepository extends MongoRepository<Story, String> {
+    List<Story> findByTitle(@Param("title") String title);
+}
+
 ```
 
 ---
