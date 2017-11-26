@@ -7,7 +7,7 @@ spring init \
     -artifactId=observablespring \
     -name=author \
     -bootVersion=2.0.0.M6 \
-    author
+    observablespring
 ```
 
 `./src/main/java/com/joaovicente/author/Author.java`
