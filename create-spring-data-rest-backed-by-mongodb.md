@@ -163,7 +163,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "stories", path = "stories")
 public interface StoryRepository extends MongoRepository<Story, String> {
     List<Story> findByTitle(@Param("title") String title);
-}  
+}
 ```
 
 # Packaging the app as a docker image
@@ -178,11 +178,11 @@ mvn clean package docker:build
 docker-compose up
 ```
 
-# Explore entities using the HAL browser
+# Explore the REST API
 
 ## Create an Author
 
-TODO
+TODO: copy from below
 
 ## Create a Story
 
@@ -192,109 +192,9 @@ TODO
 
 docker exec -it 3e07ca653888 sh
 
-```
- 
-```
 
- 
-
- 
-
- 
 
 ---
-
-```
-package com.joaovicente.author;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-
-@Data
-public class Author {
-    @Id private String id;
-    @Version Long version // ETag support
-    private String name;
-    private String email;
-}
-```
-
-`./src/main/java/com/joaovicente/author/Author.java`
-
-```
-package com.joaovicente.author;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class AuthorApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(AuthorApplication.class, args);
-    }
-```
-
-`./src/main/java/com/joaovicente/author/AuthorRepository.java`
-
-```
-package com.joaovicente.author;
-
-import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
-@RepositoryRestResource(collectionResourceRel = "authors", path = "authors")
-public interface AuthorRepository extends MongoRepository<Author, String> {
-    List<Author> findByName(@Param("name") String name);
-}
-```
-
-```
-mvn spring-boot:run
-```
-
-# Docker setup
-
-Follow Dockerising... steps to build a docker image
-
-When done, add the following to ./src/main/resources/application.properties
-
-```
-spring.data.mongodb.host=mongoserver
-spring.data.mongodb.port=27017
-```
-
-and rebuild the docker container:
-
-```
-mvn clean package docker:build
-```
-
-Create Docker compose `./docker-compose.yml`
-
-```
-author:
-  image: joaovicente/author:latest
-  ports:
-    - "8080:8080"
-  links:
-    - mongodb
-
-mongodb:
-  image: mongo:3.0.4
-  ports:
-    - "27017:27017"
-  command: mongod --smallfiles
-```
-
-Now start-up the mongodb and author containers
-
-```
-docker-compose.yml
-```
-
-When you POST an Author
 
 ```
 curl -X POST \
