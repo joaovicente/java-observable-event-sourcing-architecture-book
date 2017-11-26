@@ -6,6 +6,7 @@ spring init \
     -groupId=com.joaovicente \
     -artifactId=author \
     -name=author \
+    -bootVersion=2.0.0.M6 \
     author
 ```
 
