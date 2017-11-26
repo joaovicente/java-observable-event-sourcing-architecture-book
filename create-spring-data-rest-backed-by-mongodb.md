@@ -4,7 +4,7 @@ Assumes MongoDB is already running
 spring init \
     -d=data-rest,data-mongodb,lombok,data-rest-hal \
     -groupId=com.joaovicente \
-    -artifactId=author \
+    -artifactId=observablespring \
     -name=author \
     -bootVersion=2.0.0.M6 \
     author
