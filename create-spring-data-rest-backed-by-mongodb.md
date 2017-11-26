@@ -85,11 +85,31 @@ mongodb:
 
 ## Create Entities and Repositories
 
-Continues from here
+Create the Author entity
+
+`./src/main/java/com/joaovicente/observablespring/Author.java`
+
+```
+package com.joaovicente.observablespring;
+
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+
+@Data
+public class Author {
+    @Id private String id;
+    private String email;
+    private String name;
+}
+```
+
+And its repository
+
+...
 
 ---
 
-`./src/main/java/com/joaovicente/author/Author.java`
+
 
 ```
 package com.joaovicente.author;
