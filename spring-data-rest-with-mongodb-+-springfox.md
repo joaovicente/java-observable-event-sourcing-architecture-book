@@ -1,4 +1,4 @@
-https://reflectoring.io/documenting-spring-data-rest-api-with-springfox/ is a good guide for Spring data Swagger support
+[https://reflectoring.io/documenting-spring-data-rest-api-with-springfox/](https://reflectoring.io/documenting-spring-data-rest-api-with-springfox/) is a good guide for Spring data Swagger support
 
 A summary of steps is shown beloe
 
@@ -24,8 +24,6 @@ In pom.xml you will need the following dependencies
 
 And
 
-
-
 On your application class you will need `@EnableSwagger2` and `@Import(SpringDataRestConfiguration.class)`
 
 ```
@@ -42,9 +40,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Import(SpringDataRestConfiguration.class)
 public class AuthorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AuthorApplication.class, args);
+    }
 }
 ```
 
@@ -75,7 +73,6 @@ public class SpringFoxConfiguration {
                 regex("/stories.*"));
     }
 }
- 
 ```
 
 
