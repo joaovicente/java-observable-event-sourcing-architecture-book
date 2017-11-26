@@ -163,9 +163,44 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "stories", path = "stories")
 public interface StoryRepository extends MongoRepository<Story, String> {
     List<Story> findByTitle(@Param("title") String title);
-}
+}  
+```
+
+# Packaging the app as a docker image
 
 ```
+mvn clean package docker:build
+```
+
+# Running the app with a MongoDB backend, using Docker Compose
+
+```
+docker-compose up
+```
+
+# Explore entities using the HAL browser
+
+## Create an Author
+
+TODO
+
+## Create a Story
+
+TODO
+
+## Inspect MongoDB
+
+docker exec -it 3e07ca653888 sh
+
+```
+ 
+```
+
+ 
+
+ 
+
+ 
 
 ---
 
