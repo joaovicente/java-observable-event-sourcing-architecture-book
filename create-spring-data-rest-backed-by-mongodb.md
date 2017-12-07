@@ -1,4 +1,4 @@
-# Create app
+# Create Spring Boot app
 
 From the command line execute
 
