@@ -166,7 +166,16 @@ public interface StoryRepository extends MongoRepository<Story, String> {
 }
 ```
 
-# Packaging the app as a docker image
+# Configure MongoDB 
+
+add mongodb connection settings to `./src/main/resources/application.properties`
+
+```
+spring.data.mongodb.host=mongodb
+spring.data.mongodb.port=27017
+```
+
+# Package the app as a docker image
 
 ```
 mvn clean package docker:build
@@ -191,8 +200,6 @@ TODO
 ## Inspect MongoDB
 
 docker exec -it 3e07ca653888 sh
-
-
 
 ---
 
