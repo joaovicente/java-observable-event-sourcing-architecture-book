@@ -374,3 +374,5 @@ bzt author-create-load-test.yml
 
 And it will have created 10 users, 1 per second, which is not much of a load test but it illustrates how to create one
 
+If you want to do more on the load test side the [Taurus JMeter manual](https://github.com/Blazemeter/taurus/blob/master/site/dat/docs/JMeter.md) should help. You will find good info about using data sources in the [JMeter examples](https://github.com/Blazemeter/taurus/tree/master/examples/jmeter).
+
