@@ -349,9 +349,28 @@ scenarios:
 
 sourced from `author-create.csv`
 
-WIP script \(not failing but not creating data\)
+```
+name,email
+antoinette,antoinette@gmail.com
+brian,brian@yahoo.com
+carl,carl@gmail.com
+david,david@yahoo.com
+edith,edith@gmail.com
+frank,frank@yahoo.com
+greg,greg@gmail.com
+hugo,hugo@yahoo.com
+isabel,isabel@gmail.com
+john,john@yahoo.com
+kevin,kevin@gmail.com
+lidia,lidia@yahoo.com
+mark,mark@yahoo.com
+```
 
+Run it the same way
 
+```
+bzt author-create-load-test.yml
+```
 
-
+And it will have created 10 users, 1 per second, which is not much of a load test but it illustrates how to create one
 
