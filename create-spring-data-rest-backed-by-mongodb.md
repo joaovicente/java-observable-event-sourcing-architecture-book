@@ -166,7 +166,7 @@ public interface StoryRepository extends MongoRepository<Story, String> {
 }
 ```
 
-# Configure MongoDB 
+# Configure MongoDB
 
 add mongodb connection settings to `./src/main/resources/application.properties`
 
@@ -199,7 +199,13 @@ TODO
 
 ## Inspect MongoDB
 
-docker exec -it 3e07ca653888 sh
+```
+docker exec -it observablespring_mongodb_1 sh
+
+#mongo
+
+>help
+```
 
 ---
 
