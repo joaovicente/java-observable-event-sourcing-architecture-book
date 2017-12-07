@@ -291,7 +291,7 @@ docker exec -it observablespring_mongodb_1 sh
 
 ## Load test
 
-Taurus \([https://hub.docker.com/r/blazemeter/taurus/](https://hub.docker.com/r/blazemeter/taurus/%29\)\) is a very useful load test framework. We'll use it to put some load through the service
+Taurus \([https://hub.docker.com/r/blazemeter/taurus/](https://hub.docker.com/r/blazemeter/taurus/%29%29\) is a very useful load test framework. We'll use it to put some load through the service
 
 ```
 sudo pip install bzt
@@ -322,7 +322,7 @@ bzt load-test.yml
 
 And you should see a nice ASCII dashboard showing how the Author service is coping with the load
 
-Now lets create a more interesting test `author-create-load-test.yml`which will actually create users 
+Now lets create a more interesting test `author-create-load-test.yml`which will actually create users
 
 ```
 ---
@@ -350,29 +350,6 @@ scenarios:
 sourced from `author-create.csv`
 
 WIP script \(not failing but not creating data\)
-
-```
----
-execution:
-- concurrency: 1
-  hold-for: 10s
-  scenario: author-create
-  #write-xml-jtl: full
-
-antoinette,antoinette@gmail.com
-brian,brian@yahoo.com
-carl,carl@gmail.com
-david,david@yahoo.com
-edith,edith@gmail.com
-frank,frank@yahoo.com
-greg,greg@gmail.com
-hugo,hugo@yahoo.com
-isabel,isabel@gmail.com
-john,john@yahoo.com
-kevin,kevin@gmail.com
-lidia,lidia@yahoo.com
-mark,mark@yahoo
-```
 
 
 
