@@ -250,11 +250,10 @@ curl -X POST \
   http://localhost:8080/stories \
   -H 'content-type: application/json' \
   -d '{
-	"title":"Once",
-	"body":"Once upon a time ...",
-	"author":"/authors/5a038cab52faff0001e77123"
+    "title":"Once",
+    "body":"Once upon a time ...",
+    "author":"/authors/5a038cab52faff0001e77123"
 }'
-
 ```
 
 which will return
@@ -275,7 +274,6 @@ which will return
         }
     }
 }
-
 ```
 
 ## Inspect MongoDB
@@ -287,18 +285,19 @@ docker exec -it observablespring_mongodb_1 sh
 
 >db.story.find()
 { "_id" : ObjectId("5a29c3ec52faff0001ee98e9"), "_class" : "com.joaovicente.observablespring.Story", "title" : "Once", "body" : "Once upon a time ...", "author" : DBRef("author", ObjectId("5a038cab52faff0001e77123")) }
-
 ```
 
 ---
 
-Load test using Taurus \([https://hub.docker.com/r/blazemeter/taurus/\](https://hub.docker.com/r/blazemeter/taurus/%29\)
+## Load test
+
+Taurus \([https://hub.docker.com/r/blazemeter/taurus/](https://hub.docker.com/r/blazemeter/taurus/%29\)\) is a very useful load test framework. We'll use it to put some load through the service
 
 ```
 sudo pip install bzt
 ```
 
-create a `load-test.yml` file
+create a simple`load-test.yml` file
 
 ```
 ---
@@ -323,7 +322,7 @@ bzt load-test.yml
 
 And you should see a nice ASCII dashboard showing how the Author service is coping with the load
 
-WIP script \(not failing but not creating data\)
+Now lets create a more interesting test `author-create-load-test.yml`which will actually create users 
 
 ```
 ---
@@ -331,7 +330,7 @@ execution:
 - concurrency: 1
   hold-for: 10s
   scenario: author-create
-  #write-xml-jtl: full
+  write-xml-jtl: full
 
 scenarios:
   author-create:
@@ -348,8 +347,18 @@ scenarios:
         email: ${email}
 ```
 
+sourced from `author-create.csv`
+
+WIP script \(not failing but not creating data\)
+
 ```
-name,email
+---
+execution:
+- concurrency: 1
+  hold-for: 10s
+  scenario: author-create
+  #write-xml-jtl: full
+
 antoinette,antoinette@gmail.com
 brian,brian@yahoo.com
 carl,carl@gmail.com
@@ -362,8 +371,10 @@ isabel,isabel@gmail.com
 john,john@yahoo.com
 kevin,kevin@gmail.com
 lidia,lidia@yahoo.com
-mark,mark@yahoo.com
+mark,mark@yahoo
 ```
+
+
 
 
 
