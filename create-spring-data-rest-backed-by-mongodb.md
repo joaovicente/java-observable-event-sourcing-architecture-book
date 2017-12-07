@@ -191,24 +191,6 @@ docker-compose up
 
 ## Create an Author
 
-TODO: copy from below
-
-## Create a Story
-
-TODO
-
-## Inspect MongoDB
-
-```
-docker exec -it observablespring_mongodb_1 sh
-
-#mongo
-
->help
-```
-
----
-
 ```
 curl -X POST \
   http://localhost:8080/authors \
@@ -258,6 +240,57 @@ you should be able to GET the Author
   }
 }
 ```
+
+## Create a Story
+
+Create a story linked to the Author above
+
+```
+curl -X POST \
+  http://localhost:8080/stories \
+  -H 'content-type: application/json' \
+  -d '{
+	"title":"Once",
+	"body":"Once upon a time ...",
+	"author":"/authors/5a038cab52faff0001e77123"
+}'
+
+```
+
+which will return
+
+```
+{
+    "title": "Once",
+    "body": "Once upon a time ...",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/stories/5a29c3ec52faff0001ee98e9"
+        },
+        "story": {
+            "href": "http://localhost:8080/stories/5a29c3ec52faff0001ee98e9"
+        },
+        "author": {
+            "href": "http://localhost:8080/stories/5a29c3ec52faff0001ee98e9/author"
+        }
+    }
+}
+
+```
+
+## Inspect MongoDB
+
+```
+docker exec -it observablespring_mongodb_1 sh
+
+#mongo
+
+>db.story.find()
+{ "_id" : ObjectId("5a29c3ec52faff0001ee98e9"), "_class" : "com.joaovicente.observablespring.Story", "title" : "Once", "body" : "Once upon a time ...", "author" : DBRef("author", ObjectId("5a038cab52faff0001e77123")) }
+
+```
+
+---
 
 Load test using Taurus \([https://hub.docker.com/r/blazemeter/taurus/\](https://hub.docker.com/r/blazemeter/taurus/%29\)
 
