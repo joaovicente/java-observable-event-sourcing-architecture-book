@@ -91,7 +91,7 @@ Create the Author entity
 
 `./src/main/java/com/joaovicente/observablespring/Author.java`
 
-```
+```java
 package com.joaovicente.observablespring;
 
 import org.springframework.data.annotation.Id;
@@ -109,7 +109,7 @@ And its repository
 
 `./src/main/java/com/joaovicente/observablespring/AuthorRepository.java`
 
-```
+```java
 package com.joaovicente.observablespring;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -130,7 +130,7 @@ Create the Story entity
 
 `./src/main/java/com/joaovicente/observablespring/Story.java`
 
-```
+```java
 package com.joaovicente.observablespring;
 
 import org.springframework.data.annotation.Id;
@@ -151,7 +151,7 @@ And its repository
 
 `./src/main/java/com/joaovicente/observablespring/StoryRepository.java`
 
-```
+```java
 package com.joaovicente.observablespring;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
