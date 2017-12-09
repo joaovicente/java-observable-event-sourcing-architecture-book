@@ -73,7 +73,7 @@ create `docker-compose.yml`
 version: '2'
 services:
   observablespring:
-    container_name: my_observablespring
+    container_name: jv_observablespring
     image: joaovicente/observablespring:latest
     ports:
       - "8080:8080"
@@ -81,7 +81,7 @@ services:
     - mongodb
 
   mongodb:
-    container_name: my_mongodb
+    container_name: jv_mongodb
     image: mongo:3.0.4
     ports:
       - "27017:27017"
