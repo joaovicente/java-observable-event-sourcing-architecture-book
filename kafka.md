@@ -1,6 +1,6 @@
 Single broker Kafka using [https://hub.docker.com/r/wurstmeister/kafka/](https://hub.docker.com/r/wurstmeister/kafka/)
 
-> Be carefull with this issue: [https://github.com/wurstmeister/kafka-docker/issues/211](https://github.com/wurstmeister/kafka-docker/issues/211)
+> Be careful with this issue: [https://github.com/wurstmeister/kafka-docker/issues/211](https://github.com/wurstmeister/kafka-docker/issues/211)
 
 edit `docker-compose.yml`
 
@@ -22,7 +22,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-Run the 
+Run the
 
 ```
 docker-compose up
