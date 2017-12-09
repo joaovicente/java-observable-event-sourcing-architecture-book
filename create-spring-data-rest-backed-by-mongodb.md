@@ -70,18 +70,21 @@ And in the plugins section add the following
 create `docker-compose.yml`
 
 ```
-observablespring:
-  image: joaovicente/observablespring:latest
-  ports:
-    - "8080:8080"
-  links:
+version: '2'
+services:
+  observablespring:
+    image: joaovicente/observablespring:latest
+    ports:
+      - "8080:8080"
+    links:
     - mongodb
 
-mongodb:
-  image: mongo:3.0.4
-  ports:
-    - "27017:27017"
-  command: mongod --smallfiles
+  mongodb:
+    image: mongo:3.0.4
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+
 ```
 
 ## Create Entities and Repositories
