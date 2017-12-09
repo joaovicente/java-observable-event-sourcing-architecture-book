@@ -6,4 +6,5 @@
 * [\(arch\) Create Author REST service](a-rest-service.md)
 * [\(arch\) Swaggerify Author REST service](a-rest-service/author-rest-swagger.md)
 * [\(arch\) Dockerising Author REST service](dockerising-author-rest-service.md)
+* [Kafka](kafka.md)
 
