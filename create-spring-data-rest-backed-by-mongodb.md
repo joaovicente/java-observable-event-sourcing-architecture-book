@@ -73,6 +73,7 @@ create `docker-compose.yml`
 version: '2'
 services:
   observablespring:
+    container_name: my_observablespring
     image: joaovicente/observablespring:latest
     ports:
       - "8080:8080"
@@ -80,11 +81,11 @@ services:
     - mongodb
 
   mongodb:
+    container_name: my_mongodb
     image: mongo:3.0.4
     ports:
       - "27017:27017"
     command: mongod --smallfiles
-
 ```
 
 ## Create Entities and Repositories
