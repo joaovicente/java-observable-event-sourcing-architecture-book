@@ -7,4 +7,5 @@
 * [\(arch\) Swaggerify Author REST service](a-rest-service/author-rest-swagger.md)
 * [\(arch\) Dockerising Author REST service](dockerising-author-rest-service.md)
 * [Kafka](kafka.md)
+* [Spring Data REST +Kafka](spring-data-rest-+kafka.md)
 
