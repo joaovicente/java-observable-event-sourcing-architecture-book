@@ -1,4 +1,4 @@
-create `docker-compose.yml`
+Add zookeeper and kafka to`docker-compose.yml`
 
 ```
 version: '2'
@@ -30,7 +30,6 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-   
 ```
 
 
