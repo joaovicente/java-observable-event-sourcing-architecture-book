@@ -1,3 +1,19 @@
+# Kafka docker
+
+```
+git clone https://github.com/wurstmeister/kafka-docker.git
+```
+
+Build the base Kafka image
+
+```
+docker build -t my-kafka .
+```
+
+
+
+
+
 Single broker Kafka using [https://hub.docker.com/r/wurstmeister/kafka/](https://hub.docker.com/r/wurstmeister/kafka/)
 
 > Be careful with this issue: [https://github.com/wurstmeister/kafka-docker/issues/211](https://github.com/wurstmeister/kafka-docker/issues/211)
@@ -7,12 +23,26 @@ edit `docker-compose.yml`
 ```
 version: '2'
 services:
+  observablespring:
+    image: joaovicente/observablespring:latest
+    ports:
+      - "8080:8080"
+    links:
+    - mongodb
+
+  mongodb:
+    image: mongo:3.0.4
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+
   kafka:
-    build: .
+    image: my-kafka
     ports:
       - "9092"
     environment:
@@ -20,6 +50,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
 ```
 
 Run the
