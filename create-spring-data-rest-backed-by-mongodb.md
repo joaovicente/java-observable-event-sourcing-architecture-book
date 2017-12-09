@@ -7,10 +7,11 @@ spring init \
     -d=data-rest,data-mongodb,lombok,data-rest-hal \
     -groupId=com.joaovicente \
     -artifactId=observablespring \
-    -name=observablespring \
-    -bootVersion=2.0.0.M6 \    
+    -name=observablespring \   
     observablespring
 ```
+
+> TODO: Update to Spring boot version 2.0 \(not RELEASEd  yet\) using -bootVersion=2.0.0.M6
 
 # Be Docker ready
 
