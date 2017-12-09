@@ -41,7 +41,7 @@ docker-compose up
 Terminal 1 - Create topic and send messages
 
 ```
-docker exec -it kafkadocker_kafka_1 sh
+docker exec -it jv_kafka_1 sh
 $KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
 $KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper zookeeper:2181
 $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list kafka:9092 --topic test
@@ -52,7 +52,7 @@ hello 2
 Terminal 2 - Consume messages from topic
 
 ```
-docker exec -it kafkadocker_kafka_1 sh
+docker exec -it jv_kafka_1 sh
 $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
 ```
 
