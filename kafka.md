@@ -32,11 +32,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-Run the
+Start the containers
 
 ```
-docker-compose up
+docker-compose -p jv_ up
 ```
+
+> By default docker-compose prefixes the container name with folder name. I am using the prefix 'jv\_'  to define the desired prefix
 
 Terminal 1 - Create topic and send messages
 
