@@ -73,7 +73,6 @@ create `docker-compose.yml`
 version: '2'
 services:
   observablespring:
-    container_name: jv_observablespring
     image: joaovicente/observablespring:latest
     ports:
       - "8080:8080"
@@ -81,7 +80,6 @@ services:
     - mongodb
 
   mongodb:
-    container_name: jv_mongodb
     image: mongo:3.0.4
     ports:
       - "27017:27017"
@@ -189,7 +187,7 @@ mvn clean package docker:build
 # Running the app with a MongoDB backend, using Docker Compose
 
 ```
-docker-compose up
+docker-compose -p jv_ up
 ```
 
 # Explore the REST API
@@ -284,7 +282,7 @@ which will return
 ## Inspect MongoDB
 
 ```
-docker exec -it observablespring_mongodb_1 sh
+docker exec -it jv_mongodb_1 sh
 
 #mongo
 
