@@ -16,12 +16,13 @@ edit `docker-compose.yml`
 version: '2'
 services:
   zookeeper:
+    container_name: my_zookeeper
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-
   kafka:
-    image: my-kafka
+    container_name: my_kafka
+    build: .
     ports:
       - "9092"
     environment:
