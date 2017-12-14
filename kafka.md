@@ -10,6 +10,8 @@ Build the base Kafka image
 docker build -t my-kafka .
 ```
 
+> If rebuilding my-kafka and docker-compose up is throwing an error remember to `docker-compose -p jv_ down`
+
 edit `docker-compose.yml`
 
 ```
