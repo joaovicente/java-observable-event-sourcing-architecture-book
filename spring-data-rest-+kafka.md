@@ -24,7 +24,7 @@ services:
   kafka:
     image: my-kafka
     ports:
-      - "9092"
+      - "9092:9092"
     environment:
       KAFKA_ADVERTISED_LISTENERS: 127.0.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
