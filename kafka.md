@@ -67,5 +67,85 @@ hello 1
 hello 2
 ```
 
+# Spring Boot Kafka
+
+Create a Spring Boot project with a Kafka dependency
+
+```
+spring init -d=kafka -artifactId=spring-kafka -name=sentenceStats spring-kafka
+```
+
+edit `./src/test/java/com/example/springkafka/SpringKafkaApplicationTests.java`
+
+```
+package com.example.springkafka;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+@SpringBootApplication
+public class SpringKafkaApplication implements CommandLineRunner {
+
+    public static Logger logger = LoggerFactory.getLogger(SpringKafkaApplication.class);
+
+    public static void main(String[] args) {
+		SpringApplication.run(SpringKafkaApplication.class, args);
+	}
+
+    @Autowired
+    private KafkaTemplate<String, String> template;
+
+    private final CountDownLatch latch = new CountDownLatch(3);
+    private final String topicName = "mytest";
+
+
+    @Override
+    public void run(String... args) throws Exception {
+        this.template.send(topicName, "foo1");
+        this.template.send(topicName, "foo2");
+        this.template.send(topicName, "foo3");
+        latch.await(60, TimeUnit.SECONDS);
+        logger.info("All received");
+    }
+
+    @KafkaListener(topics = topicName)
+    public void listen(ConsumerRecord<?, ?> cr) throws Exception {
+        logger.info(cr.toString());
+        latch.countDown();
+    }
+}
+```
+
+edit `./src/main/resources/application.properties`
+
+```
+spring.kafka.consumer.group-id=foo
+spring.kafka.consumer.auto-offset-reset=earliest
+```
+
+When executed
+
+```
+mvn spring-boot:run
+```
+
+We should see the following log entries in the console log ...
+
+```
+... foo1
+... foo2
+... foo3
+```
+
 
 
