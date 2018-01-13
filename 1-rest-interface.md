@@ -53,7 +53,7 @@ which will use the`/src/main/java/com/joaovicente/CreateAuthorDto.java` shown be
 package com.joaovicente.stories;
 
 @lombok.Data
-public class AuthorDto {
+public class CreateAuthorDto {
     private String name;
     private String email;
 }
