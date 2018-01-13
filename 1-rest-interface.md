@@ -4,7 +4,7 @@ Let's start by building the Author service. We'll depend on `web` for REST capab
 
 ```bash
 spring init \
-    -d=web,lombok, \
+    -d=web,lombok,,kafka \
     -groupId=com.joaovicente \
     -artifactId=author \
     -name=author \
