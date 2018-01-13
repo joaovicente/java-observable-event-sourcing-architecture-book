@@ -26,7 +26,7 @@ mvn spring-boot:run
 
 So the application runs but is does not do anything useful, so lets stop the app now and let's create a`CreatAuthorController`by editing`./src/main/java/com/joaovicente/CreateAuthorController.java`and add  POST capabilities
 
-The handler method as shown below, to expose the`GET /authors/{authorId}`endpoint and the `POST /authors`
+The handler method as shown below, to expose`POST /authors`
 
 ```java
 package com.joaovicente.author;
