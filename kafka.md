@@ -47,29 +47,43 @@ docker-compose -p jv_ up
 
 > By default docker-compose prefixes the container name with folder name. I am using the prefix 'jv\_'  to define the desired prefix
 
-Terminal 1 - Create topic and send messages
+# Testing Kafka
+
+[kafkacat](https://github.com/edenhill/kafkacat) is an easy to use command line utility which will allows us to write, read and inspect Kafka topics.
+
+To install
 
 ```
-docker exec -it jv_kafka_1 sh
-$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
-$KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper zookeeper:2181
-$KAFKA_HOME/bin/kafka-console-producer.sh --broker-list kafka:9092 --topic test
-hello 1
-hello 2
+apt-get install kafkacat
 ```
 
-Terminal 2 - Consume messages from topic
+To write to a topic
 
 ```
-docker exec -it jv_kafka_1 sh
-$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
+echo 'some data' | kafkacat -b localhost -t some-topic
 ```
 
-All going well you should see the following in terminal 2
+To read from a topic
 
 ```
-hello 1
-hello 2
+kafkacat -b localhost -t some-topic
+
+% Auto-selecting Consumer mode (use -P or -C to override)
+some data
+```
+
+To inspect a topic
+
+```
+kafkacat -L -b localhost -t some-topic
+
+Metadata for some-topic (from broker -1: localhost:9092/bootstrap):
+ 1 brokers:
+  broker 1 at localhost:9092
+ 1 topics:
+  topic "some-topic" with 1 partitions:
+    partition 0, leader 1, replicas: 1, isrs: 1
+
 ```
 
 # Spring Boot Kafka
