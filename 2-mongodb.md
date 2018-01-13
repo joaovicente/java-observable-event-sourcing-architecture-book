@@ -8,7 +8,7 @@ In this chapter we are going to persist the Author we received in the previous c
 
 ## Carry on coding
 
-So, firstly we create the Author entity class `./src/main/java/com/joaovicente/CreateAuthorController.java `
+So, firstly we create the Author entity class `./src/main/java/com/joaovicente/CreateAuthorController.java`
 
 ```java
 package com.joaovicente.stories;
@@ -38,10 +38,9 @@ public interface AuthorRepository extends MongoRepository<Author, String> {
 }
 ```
 
-Now let's modify the `CreateAuthorController` class POST request handler to construct an `Author` object from the `CreateAuthorDto` and persist it using the `AuthorRepository` 
+Now let's modify the `CreateAuthorController` class POST request handler to construct an `Author` object from the `CreateAuthorDto` and persist it using the `AuthorRepository`
 
 ```java
-
 package com.joaovicente.stories;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +63,30 @@ public class CreateAuthorController {
         repository.insert(author);
         return author;
     }
+}
+```
+
+
+
+
+
+Now when we POST /authors
+
+```
+http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
+```
+
+and the output shows the DTO returned as expected
+
+```
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 13 Jan 2018 23:00:26 GMT
+Transfer-Encoding: chunked
+
+{
+    "email": "joao.diogo.vicente@gmail.com", 
+    "name": "joao"
 }
 ```
 
