@@ -29,27 +29,28 @@ So the application runs but is does not do anything useful, so lets stop the app
 The handler method as shown below, to expose`POST /authors`
 
 ```java
-package com.joaovicente.author;
+package com.joaovicente.stories;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
-@RequestMapping(value="/authors")
-public class AuthorController {
-    @PostMapping()
-    public String postAuthor(@RequestBody AuthorDto author)   {    
+public class CreateAuthorController {
+    @RequestMapping(value = "/authors", method = RequestMethod.POST)
+
+    public String postAuthor(@RequestBody AuthorDto author) {
         String resp = author.getName() + "," + author.getEmail() + "\n";
         return resp;
     }
+}
 ```
 
-which will use the`/src/main/java/com/joaovicente/AuthorDto.java` shown below
+which will use the`/src/main/java/com/joaovicente/CreateAuthorDto.java` shown below
 
 ```java
-package com.joaovicente.author;
+package com.joaovicente.stories;
 
 @lombok.Data
 public class AuthorDto {
