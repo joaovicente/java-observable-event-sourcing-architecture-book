@@ -83,7 +83,6 @@ Metadata for some-topic (from broker -1: localhost:9092/bootstrap):
  1 topics:
   topic "some-topic" with 1 partitions:
     partition 0, leader 1, replicas: 1, isrs: 1
-
 ```
 
 # Spring Boot Kafka
@@ -158,12 +157,23 @@ When executed
 mvn spring-boot:run
 ```
 
-We should see the following log entries in the console log ...
+We should see the following log entries in the console log
 
 ```
-... foo1
-... foo2
-... foo3
+Kafka version : 0.10.1.1
+Kafka commitId : f10ef2720b03b247
+Discovered coordinator localhost:9092 (id: 2147483646 rack: null) for group foo.
+Revoking previously assigned partitions [] for group foo
+partitions revoked:[]
+(Re-)joining group foo
+Successfully joined group foo with generation 1
+Setting newly assigned partitions [jvtest-0] for group foo
+partitions assigned:[jvtest-0]
+ConsumerRecord(topic = jvtest, partition = 0, offset = 0, CreateTime = 1515831249483, checksum = 167230666, serialized key size = -1, serialized value size = 4, key = null, value = foo1)
+ConsumerRecord(topic = jvtest, partition = 0, offset = 1, CreateTime = 1515831249491, checksum = 2130352327, serialized key size = -1, serialized value size = 4, key = null, value = foo2)
+ConsumerRecord(topic = jvtest, partition = 0, offset = 2, CreateTime = 1515831249492, checksum = 1955507721, serialized key size = -1, serialized value size = 4, key = null, value = foo3)
+All received
+
 ```
 
 
