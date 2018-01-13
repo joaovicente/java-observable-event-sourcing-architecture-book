@@ -39,11 +39,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping(value="/authors")
 public class AuthorController {
-    @GetMapping(value="/{id}")
-    public String getAuthor(@PathVariable String id) {
-        String resp = "Nothing yet for author " + id + "\n";
-        return resp;
-    }
     @PostMapping()
     public String postAuthor(@RequestBody AuthorDto author)   {    
         String resp = author.getName() + "," + author.getEmail() + "\n";
