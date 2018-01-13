@@ -111,7 +111,7 @@ public class SpringKafkaApplication implements CommandLineRunner {
     private KafkaTemplate<String, String> template;
 
     private final CountDownLatch latch = new CountDownLatch(3);
-    private final String topicName = "mytest";
+    private final String topicName = "jvtest";
 
 
     @Override
