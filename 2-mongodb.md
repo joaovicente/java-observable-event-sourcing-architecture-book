@@ -2,6 +2,12 @@
 
 In this chapter we are going to persist the Author we received in the previous chapter.
 
+## Setup MongoDB
+
+> TODO: MongoDB setup \(provide docker instructions\)
+
+## Carry on coding 
+
 So, firstly we create the Author entity class `./src/main/java/com/joaovicente/CreateAuthorController.java`
 
 ```java
