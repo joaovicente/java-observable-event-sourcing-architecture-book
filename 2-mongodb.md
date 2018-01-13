@@ -85,9 +85,9 @@ Date: Sat, 13 Jan 2018 23:36:32 GMT
 Transfer-Encoding: chunked
 
 {
-    "email": "diogo.vicente@gmail.com", 
+    "email": "joao.diogo.vicente@gmail.com", 
     "id": "5a5a980076f4641204dfe0c8", 
-    "name": "diogo"
+    "name": "joao"
 }
 
 And the Author is now persisted in MongoDB
