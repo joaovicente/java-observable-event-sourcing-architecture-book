@@ -1,4 +1,4 @@
-# REST service
+# 1 REST service
 
 Let's start by building the Author service. We'll depend on `web` for REST capabilities and `lombok` to auto-generate getters and setters for the REST DTOs. We're also going to throw in `data-mongodb` and `kafka` dependencies as we are going to use then in the next 2 chapters.
 
