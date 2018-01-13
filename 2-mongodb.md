@@ -1,6 +1,8 @@
 # MongoDB
 
-In this chapter we are going to persist the Author we received in the previous chapter.
+In this chapter we are going to persist the Author we received in the previous chapter using MongoDB
+
+> Reference: [Spring MongoDB quickstart](https://spring.io/guides/gs/accessing-data-mongodb/)
 
 ## Setup MongoDB
 
