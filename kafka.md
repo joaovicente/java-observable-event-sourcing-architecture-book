@@ -20,7 +20,7 @@ services:
       - "moby:127.0.0.1"
 
   kafka:
-    image: "confluentinc/cp-enterprise-kafka:4.0.0"
+    image: "confluentinc/cp-kafka:4.0.0"
     hostname: kafka
     ports:
       - '9092:9092'
@@ -37,7 +37,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     extra_hosts:
       - "moby:127.0.0.1"
-
 ```
 
 Start the containers
