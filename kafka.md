@@ -1,37 +1,43 @@
 # Kafka docker
 
-```
-git clone https://github.com/wurstmeister/kafka-docker.git
-```
-
-Build the base Kafka image
-
-```
-docker build -t my-kafka .
-```
-
-> If rebuilding my-kafka and docker-compose up is throwing an error remember to `docker-compose -p jv_ down`
+For Kafka we are going to use Confluent's docker images
 
 edit `docker-compose.yml`
 
 ```
+---
 version: '2'
 services:
   zookeeper:
-    container_name: jv_zookeeper
-    image: wurstmeister/zookeeper
+    image: "confluentinc/cp-zookeeper:4.0.0"
+    hostname: zookeeper
     ports:
-      - "2181:2181"
-  kafka:
-    container_name: jv_kafka
-    build: .
-    ports:
-      - "9092:9092"
+      - '32181:32181'
     environment:
-      KAFKA_ADVERTISED_LISTENERS: 127.0.0.1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+    extra_hosts:
+      - "moby:127.0.0.1"
+
+  kafka:
+    image: "confluentinc/cp-enterprise-kafka:4.0.0"
+    hostname: kafka
+    ports:
+      - '9092:9092'
+      - '29092:29092'
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    extra_hosts:
+      - "moby:127.0.0.1"
+
 ```
 
 Start the containers
@@ -99,8 +105,8 @@ public class SpringKafkaApplication implements CommandLineRunner {
     public static Logger logger = LoggerFactory.getLogger(SpringKafkaApplication.class);
 
     public static void main(String[] args) {
-		SpringApplication.run(SpringKafkaApplication.class, args);
-	}
+        SpringApplication.run(SpringKafkaApplication.class, args);
+    }
 
     @Autowired
     private KafkaTemplate<String, String> template;
