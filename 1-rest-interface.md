@@ -40,9 +40,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CreateAuthorController {
     @RequestMapping(value = "/authors", method = RequestMethod.POST)
 
-    public String postAuthor(@RequestBody AuthorDto author) {
-        String resp = author.getName() + "," + author.getEmail() + "\n";
-        return resp;
+    public CreateAuthorDto postAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
+        return createAuthorDto;
     }
 }
 ```
@@ -71,19 +70,28 @@ and try out the `GET` endpoint
 curl http://localhost:8080/authors/123
 ```
 
-You will now see the `Nothing yet for author 123` response
+I am going to use [httpie](https://httpie.org/) instead of curl to interact with the REST interface
 
-The  `POST` curl command below
+So here goes a POST /authors
 
 ```
-curl -X POST \
-  http://localhost:8080/authors \
-  -H 'content-type: application/json' \
-  -d '{
-  "name":"Joao",
-  "email":"joao.diogo.vicente@gmail.com"
-}'
+http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
 ```
 
-returns the expected a the concatenated values passed in via the `POST` request `Joao,joao.diogo.vicente@gmail.com`
+and the output shows the DTO returned as expected
+
+```
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sat, 13 Jan 2018 23:00:26 GMT
+Transfer-Encoding: chunked
+
+{
+    "email": "joao.diogo.vicente@gmail.com", 
+    "name": "joao"
+}
+
+```
+
+
 
