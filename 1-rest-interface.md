@@ -14,7 +14,7 @@ spring init \
 Let's compile the spring boot app
 
 ```
-cd author
+cd stories
 mvn clean package
 ```
 
