@@ -6,9 +6,9 @@ Let's start by building the Author service. We'll depend on `web` for REST capab
 spring init \
     -d=web,lombok,data-mongodb,kafka \
     -groupId=com.joaovicente \
-    -artifactId=author \
-    -name=author \
-    author
+    -artifactId=stories \
+    -name=stories \
+    stories
 ```
 
 Let's compile the spring boot app
