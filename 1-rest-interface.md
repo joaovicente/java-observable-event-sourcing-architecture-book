@@ -24,7 +24,7 @@ And run it
 mvn spring-boot:run
 ```
 
-So the application runs but is does not do anything useful, so lets stop the app now and let's create a `AuthorController`by editing`./src/main/java/com/joaovicente/AuthorController.java`and add GET and POST capabilities
+So the application runs but is does not do anything useful, so lets stop the app now and let's create a`CreatAuthorController`by editing`./src/main/java/com/joaovicente/CreateAuthorController.java`and add  POST capabilities
 
 The handler method as shown below, to expose the`GET /authors/{authorId}`endpoint and the `POST /authors`
 
@@ -33,9 +33,7 @@ package com.joaovicente.author;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
