@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CreateAuthorController {
     @RequestMapping(value = "/authors", method = RequestMethod.POST)
 
-    public CreateAuthorDto postAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
+    public CreateAuthorDto createAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
         return createAuthorDto;
     }
 }
