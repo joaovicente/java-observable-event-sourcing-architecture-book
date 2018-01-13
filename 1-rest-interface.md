@@ -51,7 +51,9 @@ which will use the`/src/main/java/com/joaovicente/CreateAuthorDto.java` shown be
 ```java
 package com.joaovicente.stories;
 
-@lombok.Data
+import lombok.Data;
+
+@Data
 public class CreateAuthorDto {
     private String name;
     private String email;
