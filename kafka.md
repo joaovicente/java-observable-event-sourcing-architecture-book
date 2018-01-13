@@ -173,7 +173,6 @@ ConsumerRecord(topic = jvtest, partition = 0, offset = 0, CreateTime = 151583124
 ConsumerRecord(topic = jvtest, partition = 0, offset = 1, CreateTime = 1515831249491, checksum = 2130352327, serialized key size = -1, serialized value size = 4, key = null, value = foo2)
 ConsumerRecord(topic = jvtest, partition = 0, offset = 2, CreateTime = 1515831249492, checksum = 1955507721, serialized key size = -1, serialized value size = 4, key = null, value = foo3)
 All received
-
 ```
 
 
