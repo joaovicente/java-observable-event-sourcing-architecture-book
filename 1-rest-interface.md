@@ -90,7 +90,6 @@ Transfer-Encoding: chunked
     "email": "joao.diogo.vicente@gmail.com", 
     "name": "joao"
 }
-
 ```
 
 
