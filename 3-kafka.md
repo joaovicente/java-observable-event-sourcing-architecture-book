@@ -59,11 +59,46 @@ start kafka
 docker-compose up -f docker-compose-mongo-kafka.yml
 ```
 
-on another terminal try publishing a message to a `greeting` topic using `kafkacat`
+check the kafka broker is listening and has no topics
 
 ```
-kafkacat
+ kafkacat -L -b localhost
 ```
+
+you should see this
+
+```
+Metadata for all topics (from broker -1: localhost:9092/bootstrap):
+ 1 brokers:
+  broker 1 at localhost:9092
+ 0 topics:
+
+```
+
+now try publishing a message using stdin to a `greeting` topic using `kafkacat`
+
+```
+kafkacat -P -b localhost -t greeting
+hello1
+hello2
+```
+
+exit with Ctrl+C
+
+now consume the messages from `greeting` topic
+
+```
+kafkacat -C -b localhost -t greeting
+```
+
+if you see 
+
+```
+hello1
+hello2
+```
+
+in the console your Kafka is ready to go!
 
 ## Carry on coding
 
