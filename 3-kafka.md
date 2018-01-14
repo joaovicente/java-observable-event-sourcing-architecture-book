@@ -56,7 +56,7 @@ apt-get install kafkacat
 start kafka
 
 ```
-docker-compose up -f docker-compose.yml
+docker-compose up -f docker-compose-mongo-kafka.yml
 ```
 
 on another terminal try publishing a message to a `greeting` topic using `kafkacat`
