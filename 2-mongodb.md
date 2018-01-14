@@ -89,9 +89,7 @@ Transfer-Encoding: chunked
     "id": "5a5a980076f4641204dfe0c8", 
     "name": "joao"
 }
-
-And the Author is now persisted in MongoDB
 ```
 
-
+and the Author is now persisted in MongoDB `author` collection
 
