@@ -6,7 +6,23 @@ In this chapter we are going to persist the Author we received in the previous c
 
 ## Setup MongoDB
 
-> TODO: MongoDB setup \(provide docker instructions\)
+We're going to use Docker to run MongoDB
+
+create `docker-compose-mongo.yml`
+
+```
+version: '2'
+services:
+  mongodb:
+    image: mongo:3.0.4
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+```
+
+Start Mongo docker
+
+`docker-compose -f ./docker-compose-mongo.yml up` 
 
 ## Carry on coding
 
