@@ -2,15 +2,21 @@
 
 ## Setup Kafka
 
-Docker to the rescue again, using Confluent images
+Docker to the rescue again, using Confluent Docker images
 
-edit `docker-compose-kafka.yml`
+create a new compose file now with both mongo and kafka `docker-compose-mongo-kafka.yml`
 
 ```
 ---
 version: '2'
 services:
-  zookeeper:
+    mongodb:
+    image: mongo:3.0.4
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
+
+    zookeeper:
     image: "confluentinc/cp-zookeeper:4.0.0"
     hostname: zookeeper
     ports:
@@ -41,7 +47,7 @@ services:
       - "moby:127.0.0.1"
 ```
 
-Install kafkacat to test kafka is working 
+Install kafkacat to test kafka is working
 
 ```
 apt-get install kafkacat
