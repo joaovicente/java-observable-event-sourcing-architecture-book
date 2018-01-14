@@ -153,9 +153,40 @@ public class CreateAuthorController {
 }
 ```
 
-Run it again
+Let's see Kafka in action ... re-build and run spring boot app 
 
+```
+mvn spring-boot:run
+```
 
+Make the `POST /authors` request again 
+
+```
+http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
+
+HTTP/1.1 200 
+Content-Type: application/json;charset=UTF-8
+Date: Sun, 14 Jan 2018 09:23:21 GMT
+Transfer-Encoding: chunked
+
+{
+    "email": "joao.diogo.vicente@gmail.com", 
+    "id": "5a5b21894835e25f7f0e5f05", 
+    "name": "joao"
+}
+```
+
+And now the `author-created` topic should have the message with the author details as follows
+
+```
+kafkacat -C -b localhost -t author-created               
+CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com)
+ 
+```
+
+```
+
+```
 
 
 
