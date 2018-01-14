@@ -72,7 +72,6 @@ Metadata for all topics (from broker -1: localhost:9092/bootstrap):
  1 brokers:
   broker 1 at localhost:9092
  0 topics:
-
 ```
 
 now try publishing a message using stdin to a `greeting` topic using `kafkacat`
@@ -91,7 +90,7 @@ now consume the messages from `greeting` topic
 kafkacat -C -b localhost -t greeting
 ```
 
-if you see 
+if you see
 
 ```
 hello1
