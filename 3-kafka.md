@@ -101,5 +101,11 @@ in the console your Kafka is ready to go!
 
 ## Carry on coding
 
+Now let's modify our code from the previous chapter to produce a Kafka message when an Author gets created.
+
+In the 
+
+
+
 
 
