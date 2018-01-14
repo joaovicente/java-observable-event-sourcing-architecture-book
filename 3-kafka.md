@@ -103,7 +103,57 @@ in the console your Kafka is ready to go!
 
 Now let's modify our code from the previous chapter to produce a Kafka message when an Author gets created.
 
-In the 
+In `./src/main/java/com/joaovicente/CreateAuthorController.java` we'll inject `KafkaTemplate` dependency and the topic name
+
+```java
+    @Autowired
+    private KafkaTemplate<String, String> template;
+
+    private final String topicName = "author-created";
+```
+
+and the message transmission code
+
+```java
+        String message = "CreatedAuthor: " + author.toString();
+        this.template.send(topicName, message);
+```
+
+Alltogether `/src/main/java/com/joaovicente/CreateAuthorController.java` now is as follows
+
+```java
+package com.joaovicente.stories;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+@RestController
+public class CreateAuthorController {
+    @Autowired
+    private AuthorRepository repository;
+    @Autowired
+    private KafkaTemplate<String, String> template;
+    private final String topicName = "author-created";
+    @RequestMapping(value = "/authors", method = RequestMethod.POST)
+
+    public Author createAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
+        Author author = Author.builder()
+                .name(createAuthorDto.getName())
+                .email(createAuthorDto.getEmail()).build();
+        repository.insert(author);
+        String message = "CreatedAuthor: " + author.toString();
+        this.template.send(topicName, message);
+        return author;
+    }
+}
+```
+
+Run it again
 
 
 
