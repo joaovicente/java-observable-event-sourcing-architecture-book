@@ -122,7 +122,6 @@ and the message transmission code
 also we are going to configure logging using Lombok
 
 ```java
-
 import lombok.extern.java.Log;
 @Log
 public class CreateAuthorController {
@@ -182,6 +181,8 @@ public class CreateAuthorController {
 }
 ```
 
+> Notice it is not good practice to put all this code in a controller. We are just doing it here to see all the code constructs in the same spot for ease of reading convenience
+
 finally configure Kafka consumer in`./src/main/resources/application.properties`
 
 ```
@@ -216,10 +217,7 @@ And  we should see the following in the console
 
 ```
 Received from author-created: ... key = null, value = CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com))
-
 ```
-
-
 
 You can also see the data in the topic using `kafkacat`
 
@@ -227,10 +225,6 @@ You can also see the data in the topic using `kafkacat`
 kafkacat -C -b localhost -t author-created               
 CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com)
 ```
-
-
-
-
 
 
 
