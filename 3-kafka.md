@@ -119,19 +119,43 @@ and the message transmission code
         this.template.send(topicName, message);
 ```
 
-Alltogether `/src/main/java/com/joaovicente/CreateAuthorController.java` now is as follows
+also we are going to configure logging using Lombok
+
+```java
+
+import lombok.extern.java.Log;
+@Log
+public class CreateAuthorController {
+...
+```
+
+and consume the message back as a Kafka
+
+```java
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+...
+    @KafkaListener(topics = topicName)
+    public void listen(ConsumerRecord<?, ?> cr) throws Exception {
+        log.info("Received from " + topicName + ": " + cr.toString());
+    }
+```
+
+All together `/src/main/java/com/joaovicente/CreateAuthorController.java` now is as follows
 
 ```java
 package com.joaovicente.stories;
 
+import lombok.extern.java.Log;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+@Log
 @RestController
 public class CreateAuthorController {
     @Autowired
@@ -139,8 +163,8 @@ public class CreateAuthorController {
     @Autowired
     private KafkaTemplate<String, String> template;
     private final String topicName = "author-created";
-    @RequestMapping(value = "/authors", method = RequestMethod.POST)
 
+    @RequestMapping(value = "/authors", method = RequestMethod.POST)
     public Author createAuthor(@RequestBody CreateAuthorDto createAuthorDto) {
         Author author = Author.builder()
                 .name(createAuthorDto.getName())
@@ -150,16 +174,28 @@ public class CreateAuthorController {
         this.template.send(topicName, message);
         return author;
     }
+
+    @KafkaListener(topics = topicName)
+    public void listen(ConsumerRecord<?, ?> cr) throws Exception {
+        log.info("Received from " + topicName + ": " + cr.toString());
+    }
 }
 ```
 
-Let's see Kafka in action ... re-build and run spring boot app 
+finally configure Kafka consumer in`./src/main/resources/application.properties`
+
+```
+spring.kafka.consumer.group-id=my-consumer-group
+spring.kafka.consumer.auto-offset-reset=earliest
+```
+
+Let's see Kafka in action ... re-build and run spring boot app
 
 ```
 mvn spring-boot:run
 ```
 
-Make the `POST /authors` request again 
+Make the `POST /authors` request again
 
 ```
 http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
@@ -176,17 +212,25 @@ Transfer-Encoding: chunked
 }
 ```
 
-And now the `author-created` topic should have the message with the author details as follows
+And  we should see the following in the console
+
+```
+Received from author-created: ... key = null, value = CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com))
+
+```
+
+
+
+You can also see the data in the topic using `kafkacat`
 
 ```
 kafkacat -C -b localhost -t author-created               
 CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com)
- 
 ```
 
-```
 
-```
+
+
 
 
 
