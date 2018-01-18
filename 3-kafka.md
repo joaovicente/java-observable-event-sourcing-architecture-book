@@ -199,7 +199,7 @@ mvn spring-boot:run
 Make the `POST /authors` request again
 
 ```
-http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
+$ http POST localhost:8080/authors name=joao email=joao.diogo.vicente@gmail.com
 
 HTTP/1.1 200 
 Content-Type: application/json;charset=UTF-8
@@ -226,5 +226,93 @@ kafkacat -C -b localhost -t author-created
 CreatedAuthor: Author(id=5a5b21894835e25f7f0e5f05, name=joao, email=joao.diogo.vicente@gmail.com)
 ```
 
+## Serializing POJOs using Avro
 
+Now, we are going take a few steps forward.
+
+Instead of producing and consuming a String we are serializing a POJO using [Avro](http://avro.apache.org/docs/current/gettingstartedjava.html).
+
+We are also going to store the Avro schema in [Confluent schema-register](https://docs.confluent.io/current/schema-registry/docs/index.html)
+
+### Confluent schema-register
+
+Let's extend the `docker-compose-mongo-kafka.yml` to include a container to host the schema-register
+
+```
+  schema-registry:
+    image: "confluentinc/cp-schema-registry:4.0.0"
+    hostname: schema-registry
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - '8081:8081'
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:32181
+    extra_hosts:
+      - "moby:127.0.0.1"
+```
+
+and bring-up docker compose
+
+```bash
+$ docker-compose -f docker-compose-mongo-kafka.yml up
+```
+
+> [Confluent's schema-registry github](https://github.com/confluentinc/schema-registry) has a quickstart on the REST API
+>
+> This [blog](http://cloudurable.com/blog/kafka-avro-schema-registry/index.html) has a more practical guide to serialize POJOs with Avro
+
+Firstly, lets check that the schema registry is contactable by listing registered schemas \(represented as `subjects` in the REST interface\)
+
+```
+$ http GET http://localhost:8081/subjects
+
+HTTP/1.1 200 OK
+Content-Length: 2
+Content-Type: application/vnd.schemaregistry.v1+json
+Date: Wed, 17 Jan 2018 23:25:44 GMT
+Server: Jetty(9.2.22.v20170606)
+
+[]
+```
+
+At this point we should get an empty array as shown above
+
+Now let's add a the CreateAuthor POJO as an Avro schema
+
+```
+$ echo '{"schema": "{\"type\":\"record\",\"namespace\":\"com.joaovicente.stories\",\"name\":\"CreatedAuthor\",\"fields\":[{\"name\":\"Id\",\"type\":\"string\"},{\"name\":\"Name\",\"type\":\"string\"},{\"name\":\"Email\",\"type\":\"string\"}]}"}' | http http://localhost:8081/subjects/create-author/versions
+HTTP/1.1 200 OK
+Content-Length: 8
+Content-Type: application/json
+Date: Wed, 17 Jan 2018 23:59:18 GMT
+Server: Jetty(9.2.22.v20170606)
+
+{
+    "id": 1
+}
+```
+
+Now lets check the schema has been registered
+
+```
+$ http http://localhost:8081/subjects/create-author/versions/1
+
+HTTP/1.1 200 OK
+Content-Length: 280
+Content-Type: application/vnd.schemaregistry.v1+json
+Date: Thu, 18 Jan 2018 00:03:15 GMT
+Server: Jetty(9.2.22.v20170606)
+
+{
+    "id": 1, 
+    "schema": "{\"type\":\"record\",\"name\":\"CreatedAuthor\",\"namespace\":\"com.joaovicente.stories\",\"fields\":[{\"name\":\"Id\",\"type\":\"string\"},{\"name\":\"Name\",\"type\":\"string\"},{\"name\":\"Email\",\"type\":\"string\"}]}", 
+    "subject": "create-author", 
+    "version": 1
+}
+```
+
+Next we are going to write a JUnit test produce an Avro serialized AuthorCreated POJO message and consume it back again as an Avro serialized AuthoreCreated POJO
 
