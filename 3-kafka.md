@@ -316,3 +316,51 @@ Server: Jetty(9.2.22.v20170606)
 
 Next we are going to write a JUnit test produce an Avro serialized AuthorCreated POJO message and consume it back again as an Avro serialized AuthoreCreated POJO
 
+
+
+---- CLEANUP BELOW --
+
+```
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>3.0.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-avro</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+```
+
+```java
+    @Test
+    public void testSchemaRegistryUpload() throws JsonMappingException {
+        // Create Java schema
+        ObjectMapper mapper = new ObjectMapper(new AvroFactory());
+        AvroSchemaGenerator gen = new AvroSchemaGenerator();
+        mapper.acceptJsonFormatVisitor(Author.class, gen);
+        AvroSchema schemaWrapper = gen.getGeneratedSchema();
+
+        org.apache.avro.Schema avroSchema = schemaWrapper.getAvroSchema();
+        String asJson = avroSchema.toString(false);
+        String asEscapedJson = asJson.replaceAll("\"","\\\\\"");
+        String schema = "{\"schema\": \"" + asEscapedJson + "\"}";
+
+
+//        System.out.println(schema);
+        System.out.println(asJson);
+        given()
+                .contentType("application/vnd.schemaregistry.v1+json")
+                .body(schema)
+                .post("http://localhost:8081/subjects/create-author/versions")
+         .then()
+                .statusCode(200);
+    }
+```
+
+
+
+
+
